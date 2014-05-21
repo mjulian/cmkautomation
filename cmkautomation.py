@@ -27,7 +27,7 @@ DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp',
                 }
 
 # Temporarily keep DAL1 out of this list until it's been rebuilt
-TEMP_SITES = ['ams1', 'iad2', 'mlp1', 'dal2']
+SITES = ['ams1', 'iad2', 'mlp1', 'dal2']
 
 hostname, colo, domain, suffix = socket.gethostname().split('.')
 

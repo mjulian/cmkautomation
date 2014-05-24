@@ -59,8 +59,7 @@ def query_sql(device_type):
     join device_type on device_type.id = device.type \
     where \
     device.monitor_device = 1 and \
-    device_type.type = '%s' and device.peakname like 'peak____' and \
-    colo.name <> 'DAL2' \
+    device_type.type = '%s' and device.peakname like 'peak____' \
     " % device_type
 
     # Query to get rack switches, but filter out all FEXes (since they're dumb)

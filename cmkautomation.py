@@ -11,6 +11,7 @@ SQL_PASSWORD = "Y37ji68q9v"
 SQL_DATABASE = "admintool"
 
 CMK_CONF_PATH = "/etc/check_mk/conf.d/wato"
+CMK_EXTRA_CONF_PATH = "/etc/check_mk/conf.d/extra"
 
 # The top-level keys match the device type names from Admintool.
 # The tags are arbitrary, but check_mk expects these particular ones.
@@ -208,7 +209,7 @@ def activate_local():
     Activating the local master is easy. Ensure ownership, restart cmk."
     """
     print "Activating local master"
-    command = "chown -R apache:nagios %s && /usr/bin/check_mk -O" % CMK_CONF_PATH
+    command = "chown -R apache:nagios %s %s && /usr/bin/check_mk -O" % (CMK_CONF_PATH, CMK_EXTRA_CONF_PATH)
     communicate_cli(command)
 
 

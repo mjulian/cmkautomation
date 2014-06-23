@@ -12,6 +12,8 @@ SQL_DATABASE = "admintool"
 
 CMK_CONF_PATH = "/etc/check_mk/conf.d/wato"
 
+# The top-level keys match the device type names from Admintool.
+# The tags are arbitrary, but check_mk expects these particular ones.
 DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Distribution Switch':  {'tags': ['distributionswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Core Switch':          {'tags': ['coreswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
@@ -24,6 +26,7 @@ DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp',
                 'VPN Appliance':        {'tags': ['vpnappliance', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Server':               {'tags': ['lom', 'ping', 'wato', 'lan', 'prod']},
                 'Mgmt Server':          {'tags': ['mgmtserver', 'cmk-agent', 'tcp', 'wato', 'prod']},
+                'PDU':                  {'tags': ['pdu', 'snmp-only', 'snmp', 'wato', 'prod']},
                 }
 
 # Temporarily keep DAL1 out of this list until it's been rebuilt
@@ -221,7 +224,8 @@ def activate_remote():
         cmd2 = "rsync -az /etc/nagios/authconfigs/ root@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (SERVER_NAME, site)
         cmd3 = "rsync -az --delete /etc/check_mk/conf.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (SERVER_NAME, site)
         cmd4 = "rsync -az /etc/check_mk/multisite.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (SERVER_NAME, site)
-        cmd5 = "ssh root@%s.%s.peakhosting.com \'/usr/bin/check_mk -O\'" % (SERVER_NAME, site)
+        cmd5 = "rsync -az --delete /etc/check_mk/conf.d/extra/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (SERVER_NAME, site)
+        cmd6 = "ssh root@%s.%s.peakhosting.com \'/usr/bin/check_mk -O\'" % (SERVER_NAME, site)
 
         communicate_cli(cmd1)
         communicate_cli(cmd2)

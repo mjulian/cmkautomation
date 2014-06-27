@@ -230,11 +230,18 @@ def activate_remote():
         cmd5 = "rsync -az --delete /etc/check_mk/conf.d/extra/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (SERVER_NAME, site)
         cmd6 = "ssh root@%s.%s.peakhosting.com \'/usr/bin/check_mk -O\'" % (SERVER_NAME, site)
 
+        print site, "Syncing /var/lib/check_mk/web/"
         communicate_cli(cmd1)
+        print site, "Syncing /etc/nagios/authconfigs/"
         communicate_cli(cmd2)
+        print site, "Syncing /etc/check_mk/conf.d/wato/"
         communicate_cli(cmd3)
+        print site, "Syncing /etc/check_mk/multisite.d/wato/"
         communicate_cli(cmd4)
+        print site, "Syncing /etc/check_mk/conf.d/extra/"
         communicate_cli(cmd5)
+        print site, "Restarting with new config"
+        communicate_cli(cmd6)
 
 if __name__ == "__main__":
     if hostname == "monitoring-qa":

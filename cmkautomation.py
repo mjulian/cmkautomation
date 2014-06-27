@@ -86,7 +86,7 @@ def query_sql(device_type):
     join rack on rack.id = pdu.rackid \
     join cage on cage.id = rack.cageid \
     join colo on colo.id = cage.coloid \
-    where pdu.monitor_device = 1
+    where pdu.monitor_device = 1 \
     "
 
     # Query to get VMs. VMs are assigned to a customer, so we filter

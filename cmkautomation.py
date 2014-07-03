@@ -5,10 +5,10 @@ from subprocess import Popen, PIPE
 import socket
 import sys
 
-SQL_HOST = "db01.mlp1.peakhosting.com"
+SQL_HOST = "db01.iad2.peakhosting.com"
 SQL_USER = "admintool-read"
 SQL_PASSWORD = "Y37ji68q9v"
-SQL_DATABASE = "admintool"
+SQL_DATABASE = "admintool-prod"
 
 CMK_CONF_PATH = "/etc/check_mk/conf.d/wato"
 CMK_EXTRA_CONF_PATH = "/etc/check_mk/conf.d/extra"

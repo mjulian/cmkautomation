@@ -94,6 +94,7 @@ def query_sql(device_type):
     mgmtserver_vm_query = " \
     select vm_name from customer_vm \
     where customer_id = 1 \
+    and vm_name like '%.____.peakhosting.com' \
     "
 
     # Query to get baremetal management servers.

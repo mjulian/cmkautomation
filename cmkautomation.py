@@ -28,7 +28,6 @@ DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp',
                 'VPN Appliance':        {'tags': ['vpnappliance', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Server':               {'tags': ['lom', 'ping', 'wato', 'lan', 'prod']},
                 'Mgmt Server':          {'tags': ['mgmtserver', 'cmk-agent', 'tcp', 'wato', 'prod']},
-                'PDU':                  {'tags': ['pdu', 'snmp-only', 'snmp', 'wato', 'prod']},
                 }
 
 # Temporarily keep DAL1 out of this list until it's been rebuilt

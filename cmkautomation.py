@@ -223,11 +223,11 @@ def activate_remote():
     USER = "cmk_automation"
     for site in SITES:
         print "Activating %s" % site
-        cmd1 = "rsync -az /var/lib/check_mk/web/ root@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (SERVER_NAME, site)
-        cmd2 = "rsync -az /etc/nagios/authconfigs/ root@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (SERVER_NAME, site)
-        cmd3 = "rsync -az --delete /etc/check_mk/conf.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (SERVER_NAME, site)
-        cmd4 = "rsync -az /etc/check_mk/multisite.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (SERVER_NAME, site)
-        cmd5 = "rsync -az --delete /etc/check_mk/conf.d/extra/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (SERVER_NAME, site)
+        cmd1 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /var/lib/check_mk/web/ root@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (SERVER_NAME, site)
+        cmd2 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /etc/nagios/authconfigs/ root@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (SERVER_NAME, site)
+        cmd3 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' --delete /etc/check_mk/conf.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (SERVER_NAME, site)
+        cmd4 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /etc/check_mk/multisite.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (SERVER_NAME, site)
+        cmd5 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' --delete /etc/check_mk/conf.d/extra/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (SERVER_NAME, site)
         cmd6 = "ssh root@%s.%s.peakhosting.com \'/usr/bin/check_mk -O\'" % (SERVER_NAME, site)
 
         print site, "Syncing /var/lib/check_mk/web/"

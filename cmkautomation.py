@@ -223,17 +223,17 @@ def activate_remote():
     USER = "cmk_automation"
     for site in SITES:
         print "Activating %s" % site
-        cmd1 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /var/lib/check_mk/web/ root@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (SERVER_NAME, site)
-        cmd2 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /etc/nagios/authconfigs/ root@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (SERVER_NAME, site)
-        cmd3 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' --delete /etc/check_mk/conf.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (SERVER_NAME, site)
-        cmd4 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' /etc/check_mk/multisite.d/wato/ root@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (SERVER_NAME, site)
-        cmd5 = "rsync -az -e 'ssh -i /root/.ssh/cmkautomation.priv' --delete /etc/check_mk/conf.d/extra/ root@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (SERVER_NAME, site)
-        cmd6 = "ssh -i /root/.ssh/cmkautomation.priv root@%s.%s.peakhosting.com \'/usr/bin/check_mk -O\'" % (SERVER_NAME, site)
+        cmd1 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /var/lib/check_mk/web/ %s@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (USER, USER, SERVER_NAME, site)
+        # cmd2 = "rsync -az -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/nagios/authconfigs/ %s@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (USER, USER, SERVER_NAME, site)
+        cmd3 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (USER, USER, SERVER_NAME, site)
+        cmd4 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/check_mk/multisite.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (USER, USER, SERVER_NAME, site)
+        cmd5 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/extra/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (USER, USER, SERVER_NAME, site)
+        cmd6 = "ssh -t -i /home/%s/.ssh/id_rsa %s@%s.%s.peakhosting.com \'sudo /usr/bin/check_mk -O\'" % (USER, USER, SERVER_NAME, site)
 
         print site, "Syncing /var/lib/check_mk/web/"
         communicate_cli(cmd1)
-        print site, "Syncing /etc/nagios/authconfigs/"
-        communicate_cli(cmd2)
+#        print site, "Syncing /etc/nagios/authconfigs/"
+#        communicate_cli(cmd2)
         print site, "Syncing /etc/check_mk/conf.d/wato/"
         communicate_cli(cmd3)
         print site, "Syncing /etc/check_mk/multisite.d/wato/"

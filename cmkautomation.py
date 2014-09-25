@@ -65,7 +65,7 @@ def query_sql(device_type):
     device.monitor_device = 1 \
     and device_type.type = '%s' \
     and device.peakname like 'peak____' \
-    and and device.dracip is not null \
+    and device.dracip is not null \
     " % device_type
 
     # Query to get rack switches, but filter out all FEXes (since they're dumb)

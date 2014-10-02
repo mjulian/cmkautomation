@@ -226,14 +226,13 @@ def activate_remote():
     """
     USER = "cmk_automation"
     for site in SITES:
-        print "Activating %s" % site
+        print "Syncing and restarting site:", site
         cmd1 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /var/lib/check_mk/web/ %s@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (USER, USER, SERVER_NAME, site)
         cmd2 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (USER, USER, SERVER_NAME, site)
         cmd3 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/check_mk/multisite.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (USER, USER, SERVER_NAME, site)
         cmd4 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/extra/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (USER, USER, SERVER_NAME, site)
         cmd5 = "ssh -t -i /home/%s/.ssh/id_rsa %s@%s.%s.peakhosting.com \'sudo /usr/bin/check_mk -O\'" % (USER, USER, SERVER_NAME, site)
 
-        print "Syncing and restarting site: ", site
         communicate_cli(cmd1)
         communicate_cli(cmd2)
         communicate_cli(cmd3)

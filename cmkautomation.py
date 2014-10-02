@@ -36,6 +36,7 @@ SITES = ['ams1', 'iad2', 'mlp1', 'dal2', 'sjc2']
 
 hostname, colo, domain, suffix = socket.gethostname().split('.')
 
+
 def query_sql(device_type):
     # Most of the magic happens here. We do a lot of weird shit to get around
     # AdminTool's data consistency issues. Cleaning up AT is a long-term plan
@@ -232,7 +233,7 @@ def activate_remote():
         cmd4 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/extra/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (USER, USER, SERVER_NAME, site)
         cmd5 = "ssh -t -i /home/%s/.ssh/id_rsa %s@%s.%s.peakhosting.com \'sudo /usr/bin/check_mk -O\'" % (USER, USER, SERVER_NAME, site)
 
-        print "Syncing and restarting site: , site
+        print "Syncing and restarting site: ", site
         communicate_cli(cmd1)
         communicate_cli(cmd2)
         communicate_cli(cmd3)

@@ -227,24 +227,21 @@ def activate_remote():
     for site in SITES:
         print "Activating %s" % site
         cmd1 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /var/lib/check_mk/web/ %s@%s.%s.peakhosting.com:/var/lib/check_mk/web/" % (USER, USER, SERVER_NAME, site)
-        # cmd2 = "rsync -az -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/nagios/authconfigs/ %s@%s.%s.peakhosting.com:/etc/nagios/authconfigs/" % (USER, USER, SERVER_NAME, site)
-        cmd3 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (USER, USER, SERVER_NAME, site)
-        cmd4 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/check_mk/multisite.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (USER, USER, SERVER_NAME, site)
-        cmd5 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/extra/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (USER, USER, SERVER_NAME, site)
-        cmd6 = "ssh -t -i /home/%s/.ssh/id_rsa %s@%s.%s.peakhosting.com \'sudo /usr/bin/check_mk -O\'" % (USER, USER, SERVER_NAME, site)
+        cmd2 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/wato/" % (USER, USER, SERVER_NAME, site)
+        cmd3 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' /etc/check_mk/multisite.d/wato/ %s@%s.%s.peakhosting.com:/etc/check_mk/multisite.d/wato/" % (USER, USER, SERVER_NAME, site)
+        cmd4 = "rsync -az --rsync-path='sudo rsync' -e 'ssh -i /home/%s/.ssh/id_rsa' --delete /etc/check_mk/conf.d/extra/ %s@%s.%s.peakhosting.com:/etc/check_mk/conf.d/extra/" % (USER, USER, SERVER_NAME, site)
+        cmd5 = "ssh -t -i /home/%s/.ssh/id_rsa %s@%s.%s.peakhosting.com \'sudo /usr/bin/check_mk -O\'" % (USER, USER, SERVER_NAME, site)
 
         print site, "Syncing /var/lib/check_mk/web/"
         communicate_cli(cmd1)
-#        print site, "Syncing /etc/nagios/authconfigs/"
-#        communicate_cli(cmd2)
         print site, "Syncing /etc/check_mk/conf.d/wato/"
-        communicate_cli(cmd3)
+        communicate_cli(cmd2)
         print site, "Syncing /etc/check_mk/multisite.d/wato/"
-        communicate_cli(cmd4)
+        communicate_cli(cmd3)
         print site, "Syncing /etc/check_mk/conf.d/extra/"
-        communicate_cli(cmd5)
+        communicate_cli(cmd4)
         print site, "Restarting with new config"
-        communicate_cli(cmd6)
+        communicate_cli(cmd5)
 
 if __name__ == "__main__":
     if hostname == "monitoring-qa":

@@ -27,7 +27,6 @@ DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp',
                 'Terminal Server':      {'tags': ['terminalserver', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'SLB':                  {'tags': ['slb', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'VPN Appliance':        {'tags': ['vpnappliance', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
-                'Server':               {'tags': ['lom', 'ping', 'wato', 'lan', 'prod']},
                 'Mgmt Server':          {'tags': ['mgmtserver', 'cmk-agent', 'tcp', 'wato', 'prod']},
                 }
 

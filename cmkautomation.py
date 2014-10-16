@@ -16,9 +16,11 @@ CMK_EXTRA_CONF_PATH = "/etc/check_mk/conf.d/extra"
 # The top-level keys match the device type names from Admintool.
 # The tags are arbitrary, but check_mk expects these particular ones.
 DEVICE_TYPES = {'Router':               {'tags': ['router', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
+                'Border Router':        {'tags': ['borderrouter', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Distribution Switch':  {'tags': ['distributionswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'SAN Switch':           {'tags': ['sanswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Core Switch':          {'tags': ['coreswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
+                'Core Router':          {'tags': ['corerouter', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Firewall':             {'tags': ['firewall', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'OOB Switch':           {'tags': ['oobswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
                 'Management Switch':    {'tags': ['mgmtswitch', 'snmp-only', 'snmp', 'wato', 'lan', 'prod']},
